@@ -2,7 +2,7 @@
 
 console.log('NOTICE: fabric-layers-react is designed primarily for browser environments');
 console.log('For proper testing, please use the browser-based test (test-v2.html)');
-console.log('Running with http-server -p 8080 and navigating to http://localhost:8080/test-v2.html');
+console.log('Simply open test-v2.html in your browser to run the test');
 console.log('\nAttempting to check package version information...');
 
 // Import package.json to check version information
@@ -30,8 +30,8 @@ try {
 // No need to run actual library imports in Node.js
 // This would fail due to browser dependencies
 console.log('\nTo start the browser test, run:');
-console.log('npx http-server -p 8080');
-console.log('Then open: http://localhost:8080/test-v2.html');
+console.log('npm run test:browser');
+console.log('Or simply open test-v2.html in your browser');
 
 
 // This is a simple Node.js test

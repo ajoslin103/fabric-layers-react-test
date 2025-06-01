@@ -14,12 +14,8 @@
   "dependencies": {
     "eventemitter2": "^6.4.9",
     "fabric-layers-react": "^2.0.0",
-    "fabric-pure-browser": "^5.1.0",
-    "jsdom": "^26.1.0"
+    "fabric-pure-browser": "^5.1.0"
   },
-  "devDependencies": {
-    "concurrently": "^9.1.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
-  }
+  "devDependencies": {}
+
 }
