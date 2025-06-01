@@ -1,31 +1,38 @@
 // Test script for fabric-layers-react
 
-// Import dependencies first
-import fabricPureBrowser from 'fabric-pure-browser';
-import eventEmitter2Pkg from 'eventemitter2';
-const { EventEmitter2 } = eventEmitter2Pkg;
+console.log('NOTICE: fabric-layers-react is designed primarily for browser environments');
+console.log('For proper testing, please use the browser-based test (test-v2.html)');
+console.log('Running with http-server -p 8080 and navigating to http://localhost:8080/test-v2.html');
+console.log('\nAttempting to check package version information...');
 
-// Set up globals for libraries that expect them
-global.fabric = fabricPureBrowser.fabric;
-global.EventEmitter2 = EventEmitter2;
+// Import package.json to check version information
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-// Make fabric available in the global scope for the library
-if (typeof window === 'undefined') {
-  // Node.js environment
-  global.fabric = fabricPureBrowser.fabric;
-} else {
-  // Browser environment
-  window.fabric = fabricPureBrowser.fabric;
+try {
+  // Get version information from package.json files
+  const fabricLayersReactPkg = require('fabric-layers-react/package.json');
+  const reactPkg = require('react/package.json');
+  const fabricPkg = require('fabric-pure-browser/package.json');
+  
+  console.log('\nPackage versions:');
+  console.log('- fabric-layers-react:', fabricLayersReactPkg.version);
+  console.log('- react:', reactPkg.version);
+  console.log('- fabric-pure-browser:', fabricPkg.version);
+  
+  console.log('\nIMPORTANT: The library cannot be fully tested in Node.js environment');
+  console.log('because it requires browser-specific APIs (window, document, etc.)');
+  console.log('Please use the browser-based test for complete testing.');
+} catch (error) {
+  console.error('Error checking package versions:', error);
 }
 
-// Import the library
-import * as FabricLayersReact from 'fabric-layers-react';
+// No need to run actual library imports in Node.js
+// This would fail due to browser dependencies
+console.log('\nTo start the browser test, run:');
+console.log('npx http-server -p 8080');
+console.log('Then open: http://localhost:8080/test-v2.html');
 
-// Log the version to verify the package is loaded correctly
-console.log('fabric-layers-react version:', FabricLayersReact.version);
-
-// Log available exports to verify the package structure
-console.log('Available exports:', Object.keys(FabricLayersReact));
 
 // This is a simple Node.js test
 // For a full React component test, we would need a React environment setup
