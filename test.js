@@ -1,12 +1,25 @@
 // Test script for fabric-layers-react
 
 // Import dependencies first
-global.fabric = require('fabric-pure-browser');
-const EventEmitter2 = require('eventemitter2').EventEmitter2;
+import fabricPureBrowser from 'fabric-pure-browser';
+import eventEmitter2Pkg from 'eventemitter2';
+const { EventEmitter2 } = eventEmitter2Pkg;
+
+// Set up globals for libraries that expect them
+global.fabric = fabricPureBrowser.fabric;
 global.EventEmitter2 = EventEmitter2;
 
+// Make fabric available in the global scope for the library
+if (typeof window === 'undefined') {
+  // Node.js environment
+  global.fabric = fabricPureBrowser.fabric;
+} else {
+  // Browser environment
+  window.fabric = fabricPureBrowser.fabric;
+}
+
 // Import the library
-const FabricLayersReact = require('fabric-layers-react');
+import * as FabricLayersReact from 'fabric-layers-react';
 
 // Log the version to verify the package is loaded correctly
 console.log('fabric-layers-react version:', FabricLayersReact.version);
