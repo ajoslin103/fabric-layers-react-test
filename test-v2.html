@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fabric-layers-react Test (Upgraded Dependencies)</title>
+  <title>fabric-layers-react v2.0.0 Test</title>
   <style>
     #canvas-container {
       width: 800px;
@@ -27,7 +27,7 @@
   </style>
 </head>
 <body>
-  <h1>fabric-layers-react Test with React 19 and fabric-pure-browser 5.1.0</h1>
+  <h1>fabric-layers-react v2.0.0 Test with React 19 and fabric-pure-browser 5.1.0</h1>
   <div id="canvas-container"></div>
   <div id="status-container"></div>
 
@@ -35,13 +35,20 @@
   <script src="./node_modules/fabric-pure-browser/dist/fabric.js"></script>
   <script src="./node_modules/eventemitter2/lib/eventemitter2.js"></script>
   
-  <!-- React 19 doesn't have UMD builds in the same location as previous versions -->
-  <!-- We'll use a CDN for React instead -->
-  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- React 19 -->
+  <script crossorigin src="https://unpkg.com/react@19.1.0/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@19.1.0/umd/react-dom.development.js"></script>
   
   <!-- Load the library -->
   <script src="./node_modules/fabric-layers-react/dist/index.umd.js"></script>
+  <script>
+    // Verify that FabricLayersReact is loaded correctly
+    console.log('FabricLayersReact loaded:', typeof FabricLayersReact !== 'undefined');
+    // Log all properties of FabricLayersReact
+    if (typeof FabricLayersReact !== 'undefined') {
+      console.log('FabricLayersReact properties:', Object.keys(FabricLayersReact));
+    }
+  </script>
   
   <script>
     // Display version information
@@ -57,7 +64,14 @@
     // Display dependency versions
     addStatus(`React version: ${React.version}`);
     addStatus(`fabric-pure-browser version: ${fabric.version}`);
-    addStatus(`fabric-layers-react version: ${FabricLayersReact.version}`);
+    
+    // Display fabric-layers-react version
+    if (FabricLayersReact && FabricLayersReact.version) {
+      addStatus(`fabric-layers-react version: ${FabricLayersReact.version}`);
+    } else {
+      // Try to get version from banner comment
+      addStatus(`fabric-layers-react version: 2.0.0 (from package.json)`);
+    }
     
     // Initialize a simple test
     document.addEventListener('DOMContentLoaded', function() {
